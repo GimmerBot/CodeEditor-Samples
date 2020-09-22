@@ -12,9 +12,17 @@ let periodNoTrade: number; // hours
 
 
 exports.init = async () => {
-    fastPeriod = 19;
-    slowPeriod = 26;
-    signalPeriod = 9;
+    fastPeriod = 34;
+    slowPeriod = 74;
+    signalPeriod = 40;
+    enabledStopLoss = true
+    stopLoss = -80;
+    enabledTakeProfit = false;
+    takeProfit = 100;
+    enabledTrailingStop = true;
+    trailingStart = 20;
+    trailingStop = 50;
+    periodNoTrade = 60;
 }
 
 Date.prototype.addMinutes = function (h) {
@@ -85,7 +93,7 @@ exports.tick = async () => {
             context.state.trailingPerformance = 0;
         }
 
-        console.log(`Heikin Open ${context.state.side}`);
+        console.log(`MACD Open ${context.state.side}`);
         return context.state.side;
     }
 
@@ -99,7 +107,7 @@ let closePosition = () => {
     context.state.trailingPerformance = 0;
     context.state.closeDate = new Date(context.timestamp).addMinutes(periodNoTrade).getTime();
     return 'close';
-}
+};
 
 exports.end = async () => {
-}
+};
